@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 
-
+@ExtendWith({ScreenShooterExtension.class})
 public class SignUpTest extends BaseTest{
     @RegisterExtension
     static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("C:\\Program Files (x86)\\Jenkins\\workspace\\selenium.project4\\target\\selenide-screens");

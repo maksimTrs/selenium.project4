@@ -1,3 +1,4 @@
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Assertions;
@@ -21,6 +22,7 @@ public class SignUpTest2 extends BaseTest {
         Assertions.assertFalse(signUpPage.isErrorVisible("Укажите действительный день месяца."));
 
         System.out.println("Test <SignUpTest2> <spotifyFailedSignUpCheckTextErrors()>  Passed!");
+
     }
 
 
@@ -44,6 +46,7 @@ public class SignUpTest2 extends BaseTest {
         softAssertions.assertAll();
 
         System.out.println("Test <SignUpTest2> <CheckPasswordError()>  Passed!");
+
     }
 
 
