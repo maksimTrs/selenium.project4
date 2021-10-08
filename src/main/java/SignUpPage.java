@@ -1,162 +1,134 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
 
 public class SignUpPage  {
-     private WebDriver driver;
 
-    public  SignUpPage(WebDriver driver) {
-       this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-    }
 
-    /*  public SignUpPage () {
-            super();
-        }
-    */
-    @FindBy(xpath = "//div[@id='__next']//div/h2")
-    private WebElement h2HeaderData;
+    private By h2HeaderData = By.xpath("//div[@id='__next']//div/h2");
 
-    @FindBy(xpath = "//input[@id = 'email']")
-    private WebElement emailField;
+/*    @FindBy(xpath = "//input[@id = 'email']")
+    private WebElement emailField;*/
+    private By emailField = By.xpath("//input[@id = 'email']");
 
-    @FindBy(css = "input#confirm[name='confirm']")
-    private WebElement emailConfirmField;
+    private By emailConfirmField = By.cssSelector("input#confirm[name='confirm']");
 
-    @FindBy(css = "div > input[type='password']")
-    private WebElement passwordField;
+    private By passwordField = By.cssSelector("div > input[type='password']");
 
-    @FindBy(css = "input#displayname")
-    private WebElement nameField;
+    private By nameField = By.cssSelector("input#displayname");
 
-    @FindBy(css = "input#day")
-    private WebElement dayOfBirth;
+    private By dayOfBirth = By.cssSelector("input#day");
 
-    @FindBy(xpath = "//select[@id='month']")
-    private WebElement monthDropDown;
+    private By monthDropDown = By.xpath("//select[@id='month']");
 
     String monthDropDownOption = "//select[@id='month']/option[@value = '%s']"; // May = 05.
 /*    @FindBy(xpath = "//select[@id='month']/option[@value = '05']") // May
     private WebElement monthDropDownOption;*/
 
-    @FindBy(css = "input#year")
-    private WebElement yearOfBirth;
+    private By yearOfBirth = By.cssSelector("input#year");
 
-    @FindBy(xpath = "//input[@id='gender_option_male']/following::label[1]")
-    private WebElement maleGenderRadioButton;
+    private By maleGenderRadioButton = By.xpath("//input[@id='gender_option_male']/following::label[1]");
 
-    @FindBy(css = "input#gender_option_male")
-    private WebElement femaleGenderRadioButton;
+    private By femaleGenderRadioButton = By.cssSelector("input#gender_option_male");
 
-    @FindBy(xpath = "//input[@id='terms-conditions-checkbox']/following::label[1]")
-    private WebElement termsConditionsCheckbox;
+    private By termsConditionsCheckbox = By.xpath("//input[@id='terms-conditions-checkbox']/following::label[1]");
 
-    @FindBy(xpath = "//div/label[@id='recaptcha-anchor-label']") //div[@id='rc-anchor-container']//div/span[@id='recaptcha-anchor']
-    private WebElement recaptchaCheckBox;
+   // @FindBy(xpath = "//div/label[@id='recaptcha-anchor-label']") //div[@id='rc-anchor-container']//div/span[@id='recaptcha-anchor']
+    private By recaptchaCheckBox = By.xpath("//div/label[@id='recaptcha-anchor-label']");
 
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement submitButton;
 
-    @FindBy(xpath = "//div[@aria-label='Значок ошибки' and string-length(text())>0] | //div[@aria-label='Значок ошибки']/span[string-length(text())>0]")
-    private List<WebElement> errorForEmptyFields;  // 10 fields
+    private By submitButton = By.xpath("//button[@type='submit']");
+
+   /* @FindBy(xpath = "//div[@aria-label='Значок ошибки' and string-length(text())>0] | //div[@aria-label='Значок ошибки']/span[string-length(text())>0]")
+    private List<WebElement> errorForEmptyFields;  // 10 fields*/
+    private By errorForEmptyFields = By.xpath("//div[@aria-label='Значок ошибки' and string-length(text())>0] | //div[@aria-label='Значок ошибки']/span[string-length(text())>0]");
 
     String errorByText = "//div[@aria-label='Значок ошибки'][text()= '%s']";
     //Введите адрес электронной почты.   <<>>   Введите пароль.
 
 
+    public SignUpPage openPage() {
+        Selenide.open("https://www.spotify.com/ru-ru/signup");
+        return this;
+    }
 
     public String getH2HeaderValue() {
-        return h2HeaderData.getText();
+        return $(h2HeaderData).getText();
     }
 
     public SignUpPage addTextToEmailField(String email) {
-        emailField.sendKeys(email);
+        $(emailField).setValue(email);
+      //  $(errorByText).val(email);
         return this;
     }
 
     public SignUpPage  addTextToEmailConfirmField(String email) {
-        emailConfirmField.sendKeys(email);
+        $(emailConfirmField).val(email);
         return this;
     }
 
     public SignUpPage  addTextToPasswordField(String password) {
-        passwordField.sendKeys(password);
+        $(passwordField).val(password);
         return this;
     }
 
     public SignUpPage  addTextToNameField(String name) {
-        nameField.sendKeys(name);
+        $(nameField).val(name);
         return this;
     }
 
     public SignUpPage  setDayOfBirth(int birthDay) {
-        dayOfBirth.sendKeys(String.valueOf(birthDay));
+        $(dayOfBirth).val(String.valueOf(birthDay));
         return this;
     }
 
     public SignUpPage setMonth(String birthDay) {
-        monthDropDown.click();
+        $(monthDropDown).selectOption(birthDay);
+      /*  monthDropDown.click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.
-                visibilityOfElementLocated(By.xpath(String.format(monthDropDownOption, birthDay)))).click();
+                visibilityOfElementLocated(By.xpath(String.format(monthDropDownOption, birthDay)))).click();*/
        /* WebElement ee = driver.findElement((By.xpath(String.format(monthDropDownOption, birthDay))));
         ee.click();*/
         return this;
     }
 
     public SignUpPage  setYearOfBirth(int birthYear) {
-        yearOfBirth.sendKeys(String.valueOf(birthYear));
+        $(yearOfBirth).val(String.valueOf(birthYear));
         return this;
     }
 
     public SignUpPage setMaleGenderRadioButton() {
-        maleGenderRadioButton.click();
+        $(maleGenderRadioButton).click();
         return this;
     }
 
     public SignUpPage setFemaleGenderRadioButton() {
-        femaleGenderRadioButton.click();
+        $(femaleGenderRadioButton).click();
         return this;
     }
 
     public SignUpPage setTermsConditionsCheckbox(boolean value) {
-        if (!termsConditionsCheckbox.isSelected() == value)
-            termsConditionsCheckbox.click();
+        if (!$(termsConditionsCheckbox).isSelected() == value)
+            $(termsConditionsCheckbox).click();
         return this;
     }
 
-    public void setRecaptchaCheckBox() {
-        driver.switchTo().frame(0);
-        recaptchaCheckBox.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        recaptchaCheckBox.click();
-        driver.switchTo().defaultContent();
-    }
 
     public void clickSubmitButton() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,250)");
-          submitButton.click();
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+      //  js.executeScript("window.scrollBy(0,250)");
+        executeJavaScript("window.scrollBy(0,250)");
+          $(submitButton).click();
    /*     String ss = driver.findElement(By.cssSelector("button[type='submit'] > div")).getText();
         System.out.println(ss);*/
     }
 
-    public List<WebElement> getErrorFieldsList() {
+    public ElementsCollection getErrorFieldsList() {
         //return driver.findElements(By.xpath(errorForEmptyFields.toString()));
-        return errorForEmptyFields;
+        return $$(errorForEmptyFields);
     }
 
     public String getErrorByNumber(int number) {
@@ -164,20 +136,22 @@ public class SignUpPage  {
     }
 
     public boolean isErrorVisible(String message) {
-        return driver.findElements(By.xpath(String.format(errorByText, message))).size() > 0
-                && driver.findElements(By.xpath(String.format(errorByText, message))).get(0).isDisplayed();
+        return $$(By.xpath(String.format(errorByText, message))).size() > 0
+                && $$(By.xpath(String.format(errorByText, message))).get(0).isDisplayed();
     }
 
     public void closeCookieMessage() {
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='onetrust-group-container']")));
-        driver.findElement(By.xpath("//div[@id='onetrust-close-btn-container']/button")).click();
+       /* new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='onetrust-group-container']")));*/
+        $(By.xpath("//div[@id='onetrust-group-container']")).shouldBe(exist);
+        $(By.xpath("//div[@id='onetrust-close-btn-container']/button")).click();
     }
 
 
     public void successLogOn(String email, String confirmEmail, String password, String userName, int dayBirth, String monthBirth,
                                   int yearBirth, boolean termsCondition) {
-         closeCookieMessage();
+        openPage();
+        closeCookieMessage();
         addTextToEmailField(email);
         addTextToEmailConfirmField(confirmEmail);
         addTextToPasswordField(password);

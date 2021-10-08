@@ -1,3 +1,6 @@
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Configuration.*;
+import com.codeborne.selenide.WebDriverRunner;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -9,22 +12,38 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 import java.util.concurrent.TimeUnit;
 
 
 public abstract class BaseTest {
 
-     private static WebDriver driver;
-     SignUpPage signUpPage;
 
-/*
+
     @BeforeAll
     static void setUp() {
-        WebDriverManager.chromedriver().setup();
-    }*/
+        boolean switcher = true;
+        Configuration.browser = "chrome";
+        if (switcher) {
+           // Configuration.browser = "chrome";
+            Configuration.headless = true;
+            Configuration.browserSize = "1920x1080";
+        }
+        else if (!switcher) {
+            Configuration.headless = false;
+            Configuration.browserSize = "1920x1080";
+        }
+        baseUrl = "https://www.spotify.com/ru-ru/signup";
+      //  WebDriverRunner.getWebDriver().findElement();
+       // WebDriverRunner.setWebDriver(new FirefoxDriver());
+        Configuration.reportsFolder = "C:\\Program Files (x86)\\Jenkins\\workspace\\selenium.project4\\target\\selenide-screens";
+        }
+    }
 
-    @BeforeEach
+  /*  @BeforeEach
     void setupTest() {
         boolean switcher = true;
         if (switcher) {
@@ -45,13 +64,13 @@ public abstract class BaseTest {
       //  driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         }
         driver.get("https://www.spotify.com/ru-ru/signup");
-    }
+    }*/
 
-    @AfterEach
+  /*  @AfterEach
       void tearDown() {
         if (driver != null) {
             driver.quit();
         }
-    }
-}
+    }*/
+
 
