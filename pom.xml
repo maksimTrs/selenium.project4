@@ -87,7 +87,7 @@
                 <version>${maven.surefire.ver}</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
-                    <reportsDirectory>C:/Program Files (x86)/Jenkins/workspace/selenium.project4/target</reportsDirectory>
+                    <reportsDirectory>C:/Program Files (x86)/Jenkins/workspace/selenium.project4/target/allure-results</reportsDirectory>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
