@@ -12,10 +12,10 @@ public class SignUpTest extends BaseTest{
         signUpPage.successLogOn("test@ya.ru","test@ya.ru", "test@ya.ruPASSWORD",
                 "testUser", 11, "05", 2012, true);
 
-      //  SoftAssertions softAssert = new SoftAssertions();
-      //  softAssert.assertThat(signUpPage.getH2HeaderValue()).as("Осталась страница регистрации!").isNotEqualTo("Зарегистрируйтесь и слушайте бесплатно");
-        Assertions.assertNotEquals("Зарегистрируйтесь и слушайте бесплатно", signUpPage.getH2HeaderValue(), "Осталась страница регистрации!");
-      //  softAssert.assertAll();
+        SoftAssertions softAssert = new SoftAssertions();
+        softAssert.assertThat(signUpPage.getH2HeaderValue()).as("Осталась страница регистрации!").isNotEqualTo("Зарегистрируйтесь и слушайте бесплатно");
+        //Assertions.assertNotEquals("Зарегистрируйтесь и слушайте бесплатно", signUpPage.getH2HeaderValue(), "Осталась страница регистрации!");
+        softAssert.assertAll();
     }
 
 }
