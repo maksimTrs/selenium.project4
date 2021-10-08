@@ -73,21 +73,21 @@
 
     <build>
         <plugins>
-           <!-- <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.ver}</version>
-                <configuration>
-                    &lt;!&ndash; put your configurations here &ndash;&gt;
-                </configuration>
-            </plugin>-->
+                    <configuration>
+                        <release>10</release>
+                    </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.ver}</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
-                    <reportsDirectory>C:/Program Files (x86)/Jenkins/workspace/selenium.project4/target/allure-results</reportsDirectory>
+                    <testFailureIgnore>true</testFailureIgnore>
+                   <!-- <reportsDirectory>C:/Program Files (x86)/Jenkins/workspace/selenium.project4/target/allure-results</reportsDirectory>-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
