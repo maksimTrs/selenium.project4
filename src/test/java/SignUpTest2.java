@@ -19,6 +19,8 @@ public class SignUpTest2 extends BaseTest {
 
         Assertions.assertEquals(signUpPage.getErrorByNumber(0), "Вы не достигли возраста, с которого можно пользоваться сервисом Spotify.", "Ошибки не совпадают!");
         Assertions.assertFalse(signUpPage.isErrorVisible("Укажите действительный день месяца."));
+
+        System.out.println("Test <SignUpTest2> <spotifyFailedSignUpCheckTextErrors()>  Passed!");
     }
 
 
@@ -37,8 +39,11 @@ public class SignUpTest2 extends BaseTest {
                 .clickSubmitButton();
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(signUpPage.getErrorByNumber(0)).as("Текст ошибки не сходится!").isEqualTo("Пароль слишком короткий.");
-        Assertions.assertTrue(signUpPage.isErrorVisible("Выберите месяц."), "Month Field Error is not visible!");
+        softAssertions.assertThat(signUpPage.isErrorVisible("Выберите месяц.")).as("Month Field Error is not visible!").isTrue();
+      //  Assertions.assertTrue(signUpPage.isErrorVisible("Выберите месяц."), "Month Field Error is not visible!");
         softAssertions.assertAll();
+
+        System.out.println("Test <SignUpTest2> <CheckPasswordError()>  Passed!");
     }
 
 

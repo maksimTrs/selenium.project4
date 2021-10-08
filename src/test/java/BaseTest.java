@@ -40,7 +40,13 @@ public abstract class BaseTest {
       //  WebDriverRunner.getWebDriver().findElement();
        // WebDriverRunner.setWebDriver(new FirefoxDriver());
         Configuration.reportsFolder = "C:\\Program Files (x86)\\Jenkins\\workspace\\selenium.project4\\target\\selenide-screens";
-        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        WebDriverRunner.closeWebDriver();
+        WebDriverRunner.clearBrowserCache();
+    }
     }
 
   /*  @BeforeEach
