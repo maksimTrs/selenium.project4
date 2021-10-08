@@ -36,13 +36,13 @@ public abstract class BaseTest {
        // options.addArguments("--disable-gpu");
         driver = new ChromeDriver(options);
         signUpPage =  new SignUpPage(driver);
-        } else {
+        } else if (!switcher) {
             // driver.manage().window().setSize(new Dimension(1920,1080));
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         signUpPage =  new SignUpPage(driver);
         driver.manage().window().maximize();
-       // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+      //  driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         }
         driver.get("https://www.spotify.com/ru-ru/signup");
     }

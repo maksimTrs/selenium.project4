@@ -13,9 +13,13 @@ public class SignUpTest extends BaseTest{
                 "testUser", 11, "05", 2012, true);
 
         SoftAssertions softAssert = new SoftAssertions();
-        softAssert.assertThat(signUpPage.getH2HeaderValue()).as("Осталась страница регистрации!").isNotEqualTo("Зарегистрируйтесь и слушайте бесплатно");
+        softAssert.assertThat(signUpPage.getH2HeaderValue()).as("Осталась страница регистрации!").isEqualTo("Зарегистрируйтесь и слушайте бесплатно");
         //Assertions.assertNotEquals("Зарегистрируйтесь и слушайте бесплатно", signUpPage.getH2HeaderValue(), "Осталась страница регистрации!");
+
+        softAssert.assertThat(signUpPage.getErrorFieldsList().size()).as("Кол-во ошибок не совпадает!").isEqualTo(2);
         softAssert.assertAll();
+       // Assertions.assertEquals(1, signUpPage.getErrorFieldsList().size(), "Кол-во ошибок не совпадает!");
+
     }
 
 }
