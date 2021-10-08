@@ -11,8 +11,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>10</maven.compiler.source>
-        <maven.compiler.target>10</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <lombok.version>1.18.20</lombok.version>
         <selenium.java.ver>3.141.59</selenium.java.ver>
         <junit.jupiter.ver>5.7.2</junit.jupiter.ver>
@@ -77,10 +77,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.ver}</version>
-                <configuration>
+               <!-- <configuration>
                     <source>10</source>
                     <target>10</target>
-                </configuration>
+                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
