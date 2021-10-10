@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.SelenideElement.*;
 
 public class SignUpPage  {
 
@@ -136,14 +137,13 @@ public class SignUpPage  {
     }
 
     public boolean isErrorVisible(String message) {
-        return $$(By.xpath(String.format(errorByText, message))).size() > 0
-                && $$(By.xpath(String.format(errorByText, message))).get(0).isDisplayed();
+        return $(By.xpath(String.format(errorByText, message))).isDisplayed();
     }
 
     public void closeCookieMessage() {
        /* new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='onetrust-group-container']")));*/
-        $(By.xpath("//div[@id='onetrust-group-container']")).shouldBe(exist);
+        $(By.xpath("//div[@id='onetrust-group-container']")).shouldBe(exist); // .waitUntil(exist, 10000);
         $(By.xpath("//div[@id='onetrust-close-btn-container']/button")).click();
     }
 
